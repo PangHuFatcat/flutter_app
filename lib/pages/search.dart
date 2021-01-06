@@ -16,8 +16,20 @@ class _SearchState extends State<Search> {
       appBar: AppBar(
         title: Text('搜索'),
       ),
-      body: Center(
-        child: Text(this.widget.title),
+      body: Column(
+        children: [
+          Center(
+            child: Text(this.widget.title),
+          ),
+          MaterialButton(
+            color: Colors.blue,
+            textColor: Colors.white,
+            child: Text('关闭'),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          )
+        ],
       ),
     );
   }
