@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import './pages/home.dart';
 import './pages/chart.dart';
+import './pages/register/index.dart';
+import './pages/login/index.dart';
 
 void main() => runApp(MyApp());
 
@@ -28,6 +30,9 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Welcome to Flutter',
+      routes: {
+        '/login': (context) => Login()
+      },
       home: Scaffold(
         appBar: AppBar(
           title: Text('AppBar'),
@@ -38,7 +43,7 @@ class _MyAppState extends State<MyApp> {
           onTap: _handleChangeNavigationBar,
           items: [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
+              icon: Icon(Icons.access_alarm),
               title: Text("Home"),
             ),
             BottomNavigationBarItem(
