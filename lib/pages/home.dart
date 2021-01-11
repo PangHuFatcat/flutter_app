@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_app/pages/login/index.dart';
 import '../pages/search.dart';
 
 class Home extends StatelessWidget {
@@ -74,6 +75,16 @@ class Home extends StatelessWidget {
               ],
             ),
           ),
+          RaisedButton(
+            onPressed: () {
+              Navigator.pushNamed(
+                context,
+                Login.routeName,
+                arguments: LoginArguments(id: 2333),
+              );
+            },
+            child: Text('去登录'),
+          )
         ],
       ),
     );

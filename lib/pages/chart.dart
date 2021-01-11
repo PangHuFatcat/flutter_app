@@ -1,11 +1,18 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Chart extends StatelessWidget {
+class Chart extends StatefulWidget {
+  @override
+  _ChartState createState() => _ChartState();
+}
+
+class _ChartState extends State<Chart> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Text('2333'),
+    return Container(
+      child: CircleAvatar(
+        backgroundImage: AssetImage('./assets/images/cat.jpg'),
+      ),
     );
   }
 }
+
