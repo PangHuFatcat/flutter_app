@@ -15,15 +15,12 @@ class Login extends StatelessWidget {
     print(args);
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text('登录页'),
+      ),
       body: Container(
         child: Center(
           child: Text('id: ${args?.id}'),
-        ),
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('./assets/images/cat.jpg'),
-            fit: BoxFit.cover,
-          ),
         ),
       ),
     );
