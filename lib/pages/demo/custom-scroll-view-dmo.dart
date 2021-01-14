@@ -8,7 +8,29 @@ class Chart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
+      physics: BouncingScrollPhysics(),
       slivers: [
+        SliverAppBar(
+          title: Text('胖虎'),
+          expandedHeight: 300,
+          stretch: true,
+          pinned: true,
+          backgroundColor: Colors.pink[500],
+          flexibleSpace: FlexibleSpaceBar(
+            stretchModes: [
+              StretchMode.zoomBackground,
+              StretchMode.blurBackground,
+              StretchMode.fadeTitle,
+            ],
+            background: Image.asset(
+              './assets/images/cat.jpg',
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        SliverPadding(
+          padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
+        ),
         SliverGrid(
           gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
             maxCrossAxisExtent: 200.0,
@@ -17,10 +39,10 @@ class Chart extends StatelessWidget {
             childAspectRatio: 4.0,
           ),
           delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
+                (BuildContext context, int index) {
               return Container(
                 alignment: Alignment.center,
-                color: Colors.teal[100 * (index % 9)],
+                color: Colors.pink[100 * (index % 9)],
                 child: Text('grid item $index'),
               );
             },
@@ -29,11 +51,11 @@ class Chart extends StatelessWidget {
         ),
         SliverList(
           delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
+                (BuildContext context, int index) {
               print(100 * (index % 9));
               return Container(
                 alignment: Alignment.center,
-                color: Colors.teal[100 * (index % 9)],
+                color: Colors.pink[100 * (index % 9)],
                 height: 100,
                 child: Text('list item $index'),
               );
