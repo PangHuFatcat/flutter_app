@@ -22,60 +22,9 @@ class Home extends StatelessWidget {
               ));
             },
           ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
-            child: Row(
-              children: [
-                Container(
-                  width: 100,
-                  height: 100,
-                  color: Colors.red,
-                ),
-                Expanded(
-                  child: Container(
-                    height: 100,
-                    color: Colors.blue,
-                  ),
-                )
-              ],
-            ),
-          ),
-          Container(
-            width: 100,
-            height: 100,
-            color: Colors.red,
-            child: Stack(
-              children: [
-                Positioned(
-                  top: 0,
-                  right: 0,
-                  child: Container(
-                    width: 10,
-                    height: 10,
-                    color: Colors.green,
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.bottomRight,
-                  child: Container(
-                    width: 10,
-                    height: 10,
-                    color: Colors.black,
-                  ),
-                ),
-                Positioned(
-                  top: 50,
-                  left: 0,
-                  child: Container(
-                    width: 10,
-                    height: 10,
-                    color: Colors.blue,
-                  ),
-                )
-              ],
-            ),
-          ),
-          RaisedButton(
+          MaterialButton(
+            color: Colors.blue,
+            textColor: Colors.white,
             onPressed: () {
               Navigator.pushNamed(
                 context,

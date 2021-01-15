@@ -19,7 +19,7 @@ class Login extends StatelessWidget {
         physics: BouncingScrollPhysics(),
         slivers: [
           SliverAppBar(
-            title: Text('胖虎'),
+            title: Text('标题'),
             expandedHeight: 300,
             stretch: true,
             pinned: true,
