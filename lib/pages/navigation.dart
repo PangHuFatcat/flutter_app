@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
 import './home.dart';
 import './chart.dart';
+import './mail.dart';
+import './my.dart';
 
 class NavigationView extends StatefulWidget {
   static const routeName = '/';
@@ -14,39 +18,93 @@ class _NavigationViewState extends State<NavigationView> {
   List _list = [
     Home(),
     Chart(),
+    Mail(),
+    My(),
   ];
 
   void _handleChangeNavigationBar(val) {
+    print(val);
     setState(() {
       _currentIndex = val;
     });
   }
 
+  List<Widget> _navigationBottomList() {
+    return <Widget>[
+      NavigationBottom(index: 0, imageUrl: 'assets/images/camera.png', onPressed: _handleChangeNavigationBar),
+      NavigationBottom(index: 1, imageUrl: 'assets/images/browser.png', onPressed: _handleChangeNavigationBar),
+      NavigationBottom(index: 2, imageUrl: 'assets/images/mail.png', onPressed: _handleChangeNavigationBar),
+      NavigationBottom(index: 3, imageUrl: 'assets/images/my.png', onPressed: _handleChangeNavigationBar),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+    final navigationItemCount = _navigationBottomList().length;
     return Scaffold(
       appBar: AppBar(
         title: Text('AppBar'),
       ),
       body: _list[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: _handleChangeNavigationBar,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.access_alarm),
-            title: Text("Home"),
+      bottomNavigationBar: Stack(
+        children: [
+          Container(
+            height: 50,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Color(0xFFe6e6e6),
+                  offset: Offset(0, 0),
+                  blurRadius: 5,
+                )
+              ],
+            ),
+            child: Row(
+              children: _navigationBottomList(),
+            ),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.bar_chart),
-            title: Text("Chart"),
-          ),
+          AnimatedPositioned(
+            left: ((width / navigationItemCount) * _currentIndex) + (width / navigationItemCount / 2) - 8,
+            bottom: 5,
+            child: Container(
+              color: Color(0xFF9dc6af),
+              width: 16,
+              height: 3,
+            ),
+            duration: Duration(milliseconds: 200),
+          )
         ],
-        iconSize: 24,
-        fixedColor: Colors.green,
-        selectedFontSize: 12,
-        unselectedFontSize: 12,
-        type: BottomNavigationBarType.fixed,
+      ),
+    );
+  }
+}
+
+
+class NavigationBottom extends StatelessWidget {
+  final int index;
+  final String imageUrl;
+  final Function onPressed;
+  NavigationBottom({this.index, this.imageUrl, this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: FlatButton(
+        onPressed: () {
+          onPressed(index);
+        },
+        child: Column(
+          children: [
+            SizedBox(height: 8),
+            Container(
+              width: 28,
+              child: Image.asset(imageUrl),
+            )
+          ],
+        ),
       ),
     );
   }

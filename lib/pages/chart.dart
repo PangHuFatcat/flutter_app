@@ -23,8 +23,8 @@ class FrostedDemo extends StatelessWidget {
             ),
           ),
           Positioned(
-            width: 200,
-            height: 200,
+            width: 300,
+            height: 300,
             child: ClipRect(
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
@@ -34,9 +34,10 @@ class FrostedDemo extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      'Frosted',
+                      '毛玻璃',
                       style: TextStyle(
                         fontSize: 30,
+                        color: Colors.white,
                       ),
                     ),
                   ),
