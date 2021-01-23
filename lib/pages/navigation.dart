@@ -31,22 +31,33 @@ class _NavigationViewState extends State<NavigationView> {
 
   List<Widget> _navigationBottomList() {
     return <Widget>[
-      NavigationBottom(index: 0, imageUrl: 'assets/images/camera.png', onPressed: _handleChangeNavigationBar),
-      NavigationBottom(index: 1, imageUrl: 'assets/images/browser.png', onPressed: _handleChangeNavigationBar),
-      NavigationBottom(index: 2, imageUrl: 'assets/images/mail.png', onPressed: _handleChangeNavigationBar),
-      NavigationBottom(index: 3, imageUrl: 'assets/images/my.png', onPressed: _handleChangeNavigationBar),
+      NavigationBottom(
+          index: 0,
+          imageUrl: 'assets/images/camera.png',
+          onPressed: _handleChangeNavigationBar),
+      NavigationBottom(
+          index: 1,
+          imageUrl: 'assets/images/browser.png',
+          onPressed: _handleChangeNavigationBar),
+      NavigationBottom(
+          index: 2,
+          imageUrl: 'assets/images/mail.png',
+          onPressed: _handleChangeNavigationBar),
+      NavigationBottom(
+          index: 3,
+          imageUrl: 'assets/images/my.png',
+          onPressed: _handleChangeNavigationBar),
     ];
   }
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    final MediaQueryData data = MediaQuery.of(context);
+    final padding = data.padding;
+    final size = data.size;
     final width = size.width;
     final navigationItemCount = _navigationBottomList().length;
     return Scaffold(
-      appBar: AppBar(
-        title: Text('AppBar'),
-      ),
       body: _list[_currentIndex],
       bottomNavigationBar: Stack(
         children: [
@@ -62,12 +73,12 @@ class _NavigationViewState extends State<NavigationView> {
                 )
               ],
             ),
-            child: Row(
-              children: _navigationBottomList(),
-            ),
+            child: Row(children: _navigationBottomList()),
           ),
           AnimatedPositioned(
-            left: ((width / navigationItemCount) * _currentIndex) + (width / navigationItemCount / 2) - 8,
+            left: ((width / navigationItemCount) * _currentIndex) +
+                (width / navigationItemCount / 2) -
+                8,
             bottom: 5,
             child: Container(
               color: Color(0xFF9dc6af),
@@ -82,28 +93,32 @@ class _NavigationViewState extends State<NavigationView> {
   }
 }
 
-
 class NavigationBottom extends StatelessWidget {
   final int index;
   final String imageUrl;
   final Function onPressed;
+
   NavigationBottom({this.index, this.imageUrl, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: FlatButton(
-        onPressed: () {
-          onPressed(index);
-        },
-        child: Column(
-          children: [
-            SizedBox(height: 8),
-            Container(
-              width: 28,
-              child: Image.asset(imageUrl),
-            )
-          ],
+      child: Material(
+        child: InkResponse(
+          splashFactory: InkRipple.splashFactory,
+          radius: 42,
+          onTap: () {
+            onPressed(index);
+          },
+          child: Column(
+            children: [
+              SizedBox(height: 8),
+              Container(
+                width: 28,
+                child: Image.asset(imageUrl),
+              )
+            ],
+          ),
         ),
       ),
     );
