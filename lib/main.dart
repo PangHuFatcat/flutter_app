@@ -20,6 +20,9 @@ class MyApp extends StatelessWidget {
       title: 'Welcome to Flutter',
       initialRoute: '/',
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        splashFactory: InkRipple.splashFactory,
+      ),
       routes: {
         NavigationView.routeName: (context) => NavigationView(),
         Login.routeName: (context) => Login(),

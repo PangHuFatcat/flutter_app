@@ -105,7 +105,6 @@ class NavigationBottom extends StatelessWidget {
     return Expanded(
       child: Material(
         child: InkResponse(
-          splashFactory: InkRipple.splashFactory,
           radius: 42,
           onTap: () {
             onPressed(index);

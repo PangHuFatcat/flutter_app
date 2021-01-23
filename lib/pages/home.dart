@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app/pages/login/index.dart';
 import '../pages/search.dart';
@@ -43,7 +44,7 @@ class Home extends StatelessWidget {
         children: [
           Positioned.fill(
             child: Container(
-              child: Image.asset('assets/images/bikini.jpg', fit: BoxFit.cover),
+              child: Image.asset('assets/images/2.jpg', fit: BoxFit.cover),
             ),
           ),
           Positioned.fill(
@@ -63,7 +64,7 @@ class Home extends StatelessWidget {
           SafeArea(
             child: ListView(
               physics: BouncingScrollPhysics(),
-              padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
+              padding: EdgeInsets.fromLTRB(8, 8, 8, 0),
               children: [
                 ListViewItem('练习1'),
                 ListViewItem('练习2'),
@@ -104,17 +105,68 @@ class ListViewItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        print('233');
-      },
-      child: Container(
-        height: 50,
-        margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
-        decoration: BoxDecoration(
-          color: Colors.white,
+    // GestureDetector(
+    //   onTap: () {
+    //     print('233');
+    //   },
+    //   child: Container(
+    //     height: 50,
+    //     margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
+    //     alignment: Alignment.centerLeft,
+    //     padding: EdgeInsets.only(left: 10, right: 4),
+    //     decoration: BoxDecoration(
+    //       color: Colors.white,
+    //       borderRadius: BorderRadius.circular(5),
+    //     ),
+    //     child: Row(
+    //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //       crossAxisAlignment: CrossAxisAlignment.center,
+    //       children: [
+    //         Text(
+    //           this.name,
+    //           style: TextStyle(fontSize: 16, color: Colors.black87),
+    //         ),
+    //         Icon(Icons.keyboard_arrow_right, color: Colors.black87)
+    //       ],
+    //     ),
+    //   ),
+    // )
+
+    return Container(
+      margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
+      color: Colors.transparent,
+      child: Material(
+        color: Colors.transparent,
+        child: Ink(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: InkWell(
+            borderRadius: BorderRadius.circular(5),
+            onTap: () {},
+            child: Container(
+              height: 50,
+              alignment: Alignment.centerLeft,
+              padding: EdgeInsets.only(left: 10, right: 4),
+              decoration: BoxDecoration(
+                // color: Colors.red,
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    this.name,
+                    style: TextStyle(fontSize: 16, color: Colors.black87),
+                  ),
+                  Icon(Icons.keyboard_arrow_right, color: Colors.black87)
+                ],
+              ),
+            ),
+          ),
         ),
-        child: Text(this.name),
       ),
     );
   }
