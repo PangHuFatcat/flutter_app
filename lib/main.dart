@@ -3,9 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+
+// view
 import './pages/navigation.dart';
 import './pages/register/index.dart';
 import './pages/login/index.dart';
+
+// demo
+import './pages/demo/custom-scroll-view-dmo.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,7 +18,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (Platform.isAndroid) {
-      SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(statusBarColor: Colors.transparent);
+      SystemUiOverlayStyle systemUiOverlayStyle =
+          SystemUiOverlayStyle(statusBarColor: Colors.transparent);
       SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
     }
     return MaterialApp(
@@ -27,6 +33,7 @@ class MyApp extends StatelessWidget {
         NavigationView.routeName: (context) => NavigationView(),
         Login.routeName: (context) => Login(),
         Register.routeName: (context) => Register(),
+        CustomScrollViewDemo.routeName: (context) => CustomScrollViewDemo(),
       },
     );
   }

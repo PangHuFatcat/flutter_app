@@ -4,8 +4,9 @@ class My extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Text('my'),
+      body: Center(
+        child: Text('my'),
+      ),
     );
   }
 }
-
