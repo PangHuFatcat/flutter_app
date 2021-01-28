@@ -31,6 +31,14 @@ class CustomScrollViewDemo extends StatelessWidget {
               ),
             ),
           ),
+          SliverToBoxAdapter(
+            child: Container(
+              height: 50,
+              child: Center(
+                child: Text('使用非Sliver Widget'),
+              ),
+            ),
+          ),
           SliverPadding(
             padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
           ),
