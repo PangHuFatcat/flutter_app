@@ -35,9 +35,15 @@ class Home extends StatelessWidget {
               padding: EdgeInsets.fromLTRB(8, 8, 8, 0),
               children: [
                 ListViewItem(
-                  name: '自定义CustomScrollView',
+                  name: '自定义滚动视图',
                   onTap: () {
                     Navigator.pushNamed(context, '/custom-scroll-view-demo');
+                  },
+                ),
+                ListViewItem(
+                  name: '仿酷安首页',
+                  onTap: () {
+                    Navigator.pushNamed(context, '/coolapk-index-demo');
                   },
                 ),
               ],

@@ -11,6 +11,7 @@ import './pages/login/index.dart';
 
 // demo
 import './pages/demo/custom-scroll-view-dmo.dart';
+import './pages/demo/coolapk-index-demo.dart';
 
 void main() => runApp(MyApp());
 
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
         Login.routeName: (context) => Login(),
         Register.routeName: (context) => Register(),
         CustomScrollViewDemo.routeName: (context) => CustomScrollViewDemo(),
+        CoolapkIndexDemo.routeName: (context) => CoolapkIndexDemo(),
       },
     );
   }
