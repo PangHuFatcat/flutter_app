@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
+import 'coolapk-hot-demo.dart';
 
 /*
 * 酷安首页
@@ -23,7 +24,6 @@ class _CoolapkIndexDemoState extends State<CoolapkIndexDemo>
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     this._tabController = TabController(length: 9, vsync: this);
   }
@@ -43,14 +43,13 @@ class _CoolapkIndexDemoState extends State<CoolapkIndexDemo>
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Colors.white, Color(0xfff2f1f6)],
+            colors: [Colors.white, Color(0xfff1f0f5)],
+            stops: [0.1, 0.4]
           ),
         ),
         child: SafeArea(
           child: Container(
-            color: Colors.white,
             child: NestedScrollView(
-              physics: BouncingScrollPhysics(),
               floatHeaderSlivers: true,
               headerSliverBuilder:
                   (BuildContext context, bool innerBoxIsScrolled) {
@@ -76,32 +75,24 @@ class _CoolapkIndexDemoState extends State<CoolapkIndexDemo>
                   ),
                 ];
               },
-              body: TabBarView(
-                physics: BouncingScrollPhysics(),
-                controller: this._tabController,
-                children: [
-                  ListView.builder(
-                    physics: BouncingScrollPhysics(),
-                    // padding: const EdgeInsets.all(8),
-                    itemCount: 20,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        alignment: Alignment.center,
-                        color: Colors.blue[100 * (index % 9)],
-                        height: 100,
-                        child: Text('热门 item $index'),
-                      );
-                    },
-                  ),
-                  Text('推荐'),
-                  Text('酷图'),
-                  Text('热榜'),
-                  Text('闲聊'),
-                  Text('话题'),
-                  Text('视频'),
-                  Text('问答'),
-                  Text('关注'),
-                ],
+              body: Container(
+                child: TabBarView(
+                  controller: this._tabController,
+                  children: [
+                    ListView.builder(
+                      itemCount: 3,
+                      itemBuilder: (BuildContext context, int index) => CoolapkHot(),
+                    ),
+                    Text('推荐'),
+                    Text('酷图'),
+                    Text('热榜'),
+                    Text('闲聊'),
+                    Text('话题'),
+                    Text('视频'),
+                    Text('问答'),
+                    Text('关注'),
+                  ],
+                ),
               ),
             ),
           ),
@@ -206,7 +197,6 @@ class IndexTabBar extends StatelessWidget {
         splashColor: Colors.transparent,
       ),
       child: TabBar(
-        physics: BouncingScrollPhysics(),
         isScrollable: true,
         controller: this._tabController,
         labelColor: Color(0xff109d58),
