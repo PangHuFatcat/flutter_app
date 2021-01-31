@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -44,7 +45,7 @@ class _CoolapkIndexDemoState extends State<CoolapkIndexDemo>
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [Colors.white, Color(0xfff1f0f5)],
-            stops: [0.1, 0.4]
+            stops: [0.1, 0.4],
           ),
         ),
         child: SafeArea(
@@ -54,24 +55,23 @@ class _CoolapkIndexDemoState extends State<CoolapkIndexDemo>
               headerSliverBuilder:
                   (BuildContext context, bool innerBoxIsScrolled) {
                 return [
-                  SliverAppBar(
-                    titleSpacing: 0,
-                    backgroundColor: Colors.white,
-                    floating: true,
-                    forceElevated: innerBoxIsScrolled,
-                    elevation: 0,
-                    automaticallyImplyLeading: false,
-                    title: IndexHeader(),
+                  SliverPersistentHeader(
+                    // pinned: true,
+                    // floating: true,
+                    delegate: _SliverPersistentHeaderDelegate(
+                      minHeight: 40,
+                      maxHeight: 40,
+                      child: IndexHeader(),
+                    ),
                   ),
-                  SliverAppBar(
-                    primary: false,
-                    titleSpacing: 0,
-                    backgroundColor: Colors.white,
+                  SliverPersistentHeader(
                     pinned: true,
-                    forceElevated: innerBoxIsScrolled,
-                    elevation: 0,
-                    automaticallyImplyLeading: false,
-                    title: IndexTabBar(this._tabController),
+                    floating: true,
+                    delegate: _SliverPersistentHeaderDelegate(
+                      minHeight: 40,
+                      maxHeight: 40,
+                      child: IndexTabBar(this._tabController),
+                    ),
                   ),
                 ];
               },
@@ -81,7 +81,8 @@ class _CoolapkIndexDemoState extends State<CoolapkIndexDemo>
                   children: [
                     ListView.builder(
                       itemCount: 3,
-                      itemBuilder: (BuildContext context, int index) => CoolapkHot(),
+                      itemBuilder: (BuildContext context, int index) =>
+                          CoolapkHot(),
                     ),
                     Text('推荐'),
                     Text('酷图'),
@@ -102,6 +103,37 @@ class _CoolapkIndexDemoState extends State<CoolapkIndexDemo>
   }
 }
 
+class _SliverPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
+  _SliverPersistentHeaderDelegate({
+    @required this.minHeight,
+    @required this.maxHeight,
+    @required this.child,
+  });
+
+  final double minHeight;
+  final double maxHeight;
+  final Widget child;
+
+  @override
+  double get minExtent => minHeight;
+
+  @override
+  double get maxExtent => max(maxHeight, minHeight);
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return new SizedBox.expand(child: child);
+  }
+
+  @override
+  bool shouldRebuild(_SliverPersistentHeaderDelegate oldDelegate) {
+    return maxHeight != oldDelegate.maxHeight ||
+        minHeight != oldDelegate.minHeight ||
+        child != oldDelegate.child;
+  }
+}
+
 class IndexHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -111,22 +143,16 @@ class IndexHeader extends StatelessWidget {
         children: [
           Container(
             margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
-            width: 36,
-            height: 36,
+            width: 30,
+            height: 30,
             child: CircleAvatar(
               backgroundImage: AssetImage('./assets/images/1.jpg'),
             ),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
-                border: Border.all(
-                  width: 4,
-                  color: Color(0xfff2f2f2),
-                )),
           ),
           Expanded(
             child: Container(
               padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-              height: 36,
+              height: 30,
               decoration: BoxDecoration(
                   color: Color(0xfff2f2f2),
                   borderRadius: BorderRadius.circular(50)),
@@ -137,7 +163,7 @@ class IndexHeader extends StatelessWidget {
                     child: TextField(
                       style: TextStyle(
                         color: Color(0xff757575),
-                        fontSize: 14,
+                        fontSize: 12,
                       ),
                       cursorColor: Color(0xff757575),
                       decoration: InputDecoration(
@@ -156,12 +182,15 @@ class IndexHeader extends StatelessWidget {
           Material(
             color: Colors.transparent,
             child: Ink(
-              width: 36,
-              height: 36,
+              width: 30,
+              height: 30,
               child: InkWell(
                 borderRadius: BorderRadius.circular(18),
-                child:
-                    Icon(Icons.shopping_bag_outlined, color: Color(0xff757575)),
+                child: Icon(
+                  Icons.shopping_bag_outlined,
+                  color: Color(0xff757575),
+                  size: 20
+                ),
                 onTap: () {},
               ),
             ),
@@ -169,11 +198,15 @@ class IndexHeader extends StatelessWidget {
           Material(
             color: Colors.transparent,
             child: Ink(
-              width: 36,
-              height: 36,
+              width: 30,
+              height: 30,
               child: InkWell(
                 borderRadius: BorderRadius.circular(18),
-                child: Icon(Icons.notifications_none, color: Color(0xff757575)),
+                child: Icon(
+                  Icons.notifications_none,
+                  color: Color(0xff757575),
+                  size: 22,
+                ),
                 onTap: () {},
               ),
             ),
@@ -196,35 +229,39 @@ class IndexTabBar extends StatelessWidget {
         highlightColor: Colors.transparent,
         splashColor: Colors.transparent,
       ),
-      child: TabBar(
-        isScrollable: true,
-        controller: this._tabController,
-        labelColor: Color(0xff109d58),
-        unselectedLabelColor: Color(0xff757575),
-        indicatorPadding: EdgeInsets.all(100),
-        labelStyle: TextStyle(
-          fontSize: 15,
-          fontWeight: FontWeight.bold,
+      child: Container(
+        color: Colors.white,
+        // padding: EdgeInsets.fromLTRB(0, 0, 0, 4),
+        child: TabBar(
+          isScrollable: true,
+          controller: this._tabController,
+          labelColor: Color(0xff109d58),
+          unselectedLabelColor: Color(0xff757575),
+          indicatorPadding: EdgeInsets.all(100),
+          labelStyle: TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+          ),
+          unselectedLabelStyle: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.normal,
+          ),
+          indicator: UnderlineCoolapkTabIndicator(
+            borderSide: BorderSide(color: Color(0xff109d58), width: 2.6),
+            insets: EdgeInsets.fromLTRB(26, 0, 26, 5),
+          ),
+          tabs: [
+            Tab(text: '热门'),
+            Tab(text: '推荐'),
+            Tab(text: '酷图'),
+            Tab(text: '热榜'),
+            Tab(text: '闲聊'),
+            Tab(text: '话题'),
+            Tab(text: '视频'),
+            Tab(text: '问答'),
+            Tab(text: '关注'),
+          ],
         ),
-        unselectedLabelStyle: TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.normal,
-        ),
-        indicator: UnderlineCoolapkTabIndicator(
-          borderSide: BorderSide(color: Color(0xff109d58), width: 4),
-          insets: EdgeInsets.fromLTRB(24, 0, 24, 5),
-        ),
-        tabs: [
-          Tab(text: '热门'),
-          Tab(text: '推荐'),
-          Tab(text: '酷图'),
-          Tab(text: '热榜'),
-          Tab(text: '闲聊'),
-          Tab(text: '话题'),
-          Tab(text: '视频'),
-          Tab(text: '问答'),
-          Tab(text: '关注'),
-        ],
       ),
     );
   }
