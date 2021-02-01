@@ -165,7 +165,7 @@ class _CoolapkHotState extends State<CoolapkHot> {
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Text('来着头条推荐'),
+                                    Text('来自头条推荐'),
                                     SizedBox(width: 5),
                                     Icon(
                                       Icons.smartphone,
