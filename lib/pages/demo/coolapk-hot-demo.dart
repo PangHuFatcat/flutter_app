@@ -125,9 +125,9 @@ class _CoolapkHotState extends State<CoolapkHot> {
                               children: [
                                 Positioned.fill(
                                     child: Image.asset(
-                                      'assets/images/1.jpg',
-                                      fit: BoxFit.cover,
-                                    )),
+                                  'assets/images/1.jpg',
+                                  fit: BoxFit.cover,
+                                )),
                                 Positioned(
                                   bottom: 0,
                                   right: -5,
@@ -206,7 +206,7 @@ class _CoolapkHotState extends State<CoolapkHot> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 15),
                     AspectRatio(
                       aspectRatio: 1 / 1,
                       child: ClipRRect(
@@ -218,7 +218,10 @@ class _CoolapkHotState extends State<CoolapkHot> {
                           mainAxisSpacing: 5,
                           children: List.generate(9, (index) {
                             return Container(
-                              color: Colors.blue,
+                              child: Image.asset(
+                                'assets/images/post/post_$index.jpg',
+                                fit: BoxFit.cover,
+                              ),
                             );
                           }),
                         ),
@@ -227,24 +230,82 @@ class _CoolapkHotState extends State<CoolapkHot> {
                   ],
                 ),
               ),
+              SizedBox(height: 10,),
               Row(
                 children: [
                   Expanded(
                     child: Container(
                       height: 50,
                       color: Colors.white,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.ac_unit_outlined,
+                            color: Color(0xffa4a2a5),
+                            size: 20,
+                          ),
+                          SizedBox(width: 5),
+                          Text(
+                            '277',
+                            style: TextStyle(
+                              color: Color(0xffa4a2a5),
+                              fontSize: 14,
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                   Expanded(
                     child: Container(
                       height: 50,
                       color: Colors.white,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.wb_cloudy_outlined,
+                            color: Color(0xffa4a2a5),
+                            size: 20,
+                          ),
+                          SizedBox(width: 4),
+                          Text(
+                            '99',
+                            style: TextStyle(
+                              color: Color(0xffa4a2a5),
+                              fontSize: 14,
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                   Expanded(
                     child: Container(
                       height: 50,
                       color: Colors.white,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.wb_sunny_outlined,
+                            color: Color(0xffa4a2a5),
+                            size: 20,
+                          ),
+                          SizedBox(width: 4),
+                          Text(
+                            '10',
+                            style: TextStyle(
+                              color: Color(0xffa4a2a5),
+                              fontSize: 14,
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ],

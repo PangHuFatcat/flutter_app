@@ -1,11 +1,9 @@
 import 'dart:io';
-import 'dart:math';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart' hide NestedScrollView;
 import 'package:flutter/services.dart';
 import 'coolapk-hot-demo.dart';
+import '../utils/old_extended_nested_scroll_view.dart';
+import '../utils/nested_scroll_view_inner_scroll_position_key_widget.dart';
 
 /*
 * 酷安首页
@@ -56,44 +54,43 @@ class _CoolapkIndexDemoState extends State<CoolapkIndexDemo>
                   (BuildContext context, bool innerBoxIsScrolled) {
                 return [
                   SliverPersistentHeader(
-                    // pinned: true,
-                    // floating: true,
-                    delegate: _SliverPersistentHeaderDelegate(
-                      minHeight: 40,
-                      maxHeight: 40,
+                    delegate: StickyTabBarDelegate(
+                      height: 50,
                       child: IndexHeader(),
                     ),
                   ),
                   SliverPersistentHeader(
                     pinned: true,
                     floating: true,
-                    delegate: _SliverPersistentHeaderDelegate(
-                      minHeight: 40,
-                      maxHeight: 40,
+                    delegate: StickyTabBarDelegate(
+                      height: 46,
                       child: IndexTabBar(this._tabController),
                     ),
                   ),
                 ];
               },
-              body: Container(
-                child: TabBarView(
-                  controller: this._tabController,
-                  children: [
-                    ListView.builder(
-                      itemCount: 3,
-                      itemBuilder: (BuildContext context, int index) =>
-                          CoolapkHot(),
-                    ),
-                    Text('推荐'),
-                    Text('酷图'),
-                    Text('热榜'),
-                    Text('闲聊'),
-                    Text('话题'),
-                    Text('视频'),
-                    Text('问答'),
-                    Text('关注'),
-                  ],
-                ),
+              pinnedHeaderSliverHeightBuilder: () {
+                return 40;
+              },
+              innerScrollPositionKeyBuilder: () {
+                String index = 'Tab';
+                index += this._tabController.index.toString();
+                print(index);
+                return Key(index);
+              },
+              body: TabBarView(
+                controller: this._tabController,
+                children: [
+                  CoolapkHotView(),
+                  CoolapkRecommendView(),
+                  Text('酷图'),
+                  Text('热榜'),
+                  Text('闲聊'),
+                  Text('话题'),
+                  Text('视频'),
+                  Text('问答'),
+                  Text('关注'),
+                ],
               ),
             ),
           ),
@@ -103,22 +100,20 @@ class _CoolapkIndexDemoState extends State<CoolapkIndexDemo>
   }
 }
 
-class _SliverPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
-  _SliverPersistentHeaderDelegate({
-    @required this.minHeight,
-    @required this.maxHeight,
+class StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
+  StickyTabBarDelegate({
+    @required this.height,
     @required this.child,
   });
 
-  final double minHeight;
-  final double maxHeight;
+  final double height;
   final Widget child;
 
   @override
-  double get minExtent => minHeight;
+  double get minExtent => height;
 
   @override
-  double get maxExtent => max(maxHeight, minHeight);
+  double get maxExtent => height;
 
   @override
   Widget build(
@@ -127,10 +122,8 @@ class _SliverPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  bool shouldRebuild(_SliverPersistentHeaderDelegate oldDelegate) {
-    return maxHeight != oldDelegate.maxHeight ||
-        minHeight != oldDelegate.minHeight ||
-        child != oldDelegate.child;
+  bool shouldRebuild(StickyTabBarDelegate oldDelegate) {
+    return false;
   }
 }
 
@@ -189,7 +182,7 @@ class IndexHeader extends StatelessWidget {
                 child: Icon(
                   Icons.shopping_bag_outlined,
                   color: Color(0xff757575),
-                  size: 20
+                  size: 20,
                 ),
                 onTap: () {},
               ),
@@ -230,8 +223,8 @@ class IndexTabBar extends StatelessWidget {
         splashColor: Colors.transparent,
       ),
       child: Container(
+        height: 46,
         color: Colors.white,
-        // padding: EdgeInsets.fromLTRB(0, 0, 0, 4),
         child: TabBar(
           isScrollable: true,
           controller: this._tabController,
@@ -342,3 +335,67 @@ class _UnderlineCoolapkPainter extends BoxPainter {
     canvas.drawLine(indicator.bottomLeft, indicator.bottomRight, paint);
   }
 }
+
+class CoolapkHotView extends StatefulWidget {
+  @override
+  _CoolapkHotViewState createState() => _CoolapkHotViewState();
+}
+
+class _CoolapkHotViewState extends State<CoolapkHotView>
+    with AutomaticKeepAliveClientMixin  {
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
+    return NestedScrollViewInnerScrollPositionKeyWidget(
+      const Key('Tab0'),
+      RefreshIndicator(
+        onRefresh: () async {
+          await Future.delayed(Duration(seconds: 2), () {
+            print('下拉刷新');
+          });
+        },
+        child: ListView.builder(
+          itemCount: 3,
+          itemBuilder: (BuildContext context, int index) =>
+              CoolapkHot(),
+        ),
+      ),
+    );
+  }
+
+  @override
+  bool get wantKeepAlive => true;
+}
+
+class CoolapkRecommendView extends StatefulWidget {
+  @override
+  _CoolapkRecommendViewState createState() => _CoolapkRecommendViewState();
+}
+
+class _CoolapkRecommendViewState extends State<CoolapkRecommendView> with
+    AutomaticKeepAliveClientMixin
+{
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
+    return NestedScrollViewInnerScrollPositionKeyWidget(
+      const Key('Tab1'),
+      RefreshIndicator(
+        onRefresh: () async {
+          await Future.delayed(Duration(seconds: 2), () {
+            print('下拉刷新');
+          });
+        },
+        child: ListView.builder(
+          itemCount: 3,
+          itemBuilder: (BuildContext context, int index) =>
+              CoolapkHot(),
+        ),
+      ),
+    );
+  }
+
+  @override
+  bool get wantKeepAlive => true;
+}
+
