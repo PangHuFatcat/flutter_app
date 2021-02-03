@@ -82,7 +82,7 @@ class _CoolapkIndexDemoState extends State<CoolapkIndexDemo>
                 controller: this._tabController,
                 children: [
                   CoolapkHotView(),
-                  CoolapkRecommendView(),
+                  Text('推荐'),
                   Text('酷图'),
                   Text('热榜'),
                   Text('闲聊'),
@@ -342,7 +342,7 @@ class CoolapkHotView extends StatefulWidget {
 }
 
 class _CoolapkHotViewState extends State<CoolapkHotView>
-    with AutomaticKeepAliveClientMixin  {
+    with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -356,8 +356,7 @@ class _CoolapkHotViewState extends State<CoolapkHotView>
         },
         child: ListView.builder(
           itemCount: 3,
-          itemBuilder: (BuildContext context, int index) =>
-              CoolapkHot(),
+          itemBuilder: (BuildContext context, int index) => CoolapkHot(),
         ),
       ),
     );
@@ -366,36 +365,3 @@ class _CoolapkHotViewState extends State<CoolapkHotView>
   @override
   bool get wantKeepAlive => true;
 }
-
-class CoolapkRecommendView extends StatefulWidget {
-  @override
-  _CoolapkRecommendViewState createState() => _CoolapkRecommendViewState();
-}
-
-class _CoolapkRecommendViewState extends State<CoolapkRecommendView> with
-    AutomaticKeepAliveClientMixin
-{
-  @override
-  Widget build(BuildContext context) {
-    super.build(context);
-    return NestedScrollViewInnerScrollPositionKeyWidget(
-      const Key('Tab1'),
-      RefreshIndicator(
-        onRefresh: () async {
-          await Future.delayed(Duration(seconds: 2), () {
-            print('下拉刷新');
-          });
-        },
-        child: ListView.builder(
-          itemCount: 3,
-          itemBuilder: (BuildContext context, int index) =>
-              CoolapkHot(),
-        ),
-      ),
-    );
-  }
-
-  @override
-  bool get wantKeepAlive => true;
-}
-
