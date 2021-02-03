@@ -25,7 +25,7 @@ class CoolapkHotDemo extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               return CoolapkHot();
             },
-            itemCount: 5,
+            itemCount: 1,
           ),
         ),
       ),
