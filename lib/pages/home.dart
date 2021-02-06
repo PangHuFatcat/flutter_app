@@ -52,6 +52,12 @@ class Home extends StatelessWidget {
                     Navigator.pushNamed(context, '/coolapk-hot-demo');
                   },
                 ),
+                ListViewItem(
+                  name: '酷安帖子详情',
+                  onTap: () {
+                    Navigator.pushNamed(context, '/coolapk-hot-details-demo');
+                  },
+                ),
               ],
             ),
           )

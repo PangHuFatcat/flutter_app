@@ -1,6 +1,4 @@
-import 'dart:io';
 import 'package:flutter/material.dart' hide NestedScrollView;
-import 'package:flutter/services.dart';
 import 'coolapk-hot-demo.dart';
 import '../utils/old_extended_nested_scroll_view.dart';
 import '../utils/nested_scroll_view_inner_scroll_position_key_widget.dart';
@@ -29,13 +27,6 @@ class _CoolapkIndexDemoState extends State<CoolapkIndexDemo>
 
   @override
   Widget build(BuildContext context) {
-    if (Platform.isAndroid) {
-      SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        statusBarIconBrightness: Brightness.dark,
-      );
-      SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
-    }
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(

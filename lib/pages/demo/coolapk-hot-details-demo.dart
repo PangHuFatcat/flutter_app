@@ -1,37 +1,17 @@
-import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'coolapk-index-demo.dart';
 
-class CoolapkHotDemo extends StatelessWidget {
-  static const routeName = '/coolapk-hot-demo';
+class CoolapkHotDetailsDemo extends StatefulWidget {
+  static const routeName = '/coolapk-hot-details-demo';
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        color: Color(0xffeff2f7),
-        child: SafeArea(
-          child: ListView.builder(
-            itemBuilder: (BuildContext context, int index) {
-              return CoolapkHot();
-            },
-            itemCount: 1,
-          ),
-        ),
-      ),
-    );
-  }
+  _CoolapkHotDetailsDemoState createState() => _CoolapkHotDetailsDemoState();
 }
 
-class CoolapkHot extends StatefulWidget {
-  @override
-  _CoolapkHotState createState() => _CoolapkHotState();
-}
-
-class _CoolapkHotState extends State<CoolapkHot> {
+class _CoolapkHotDetailsDemoState extends State<CoolapkHotDetailsDemo>
+    with SingleTickerProviderStateMixin {
   String _str = '''
 贵妃糕（烤年糕）
 
@@ -67,42 +47,34 @@ class _CoolapkHotState extends State<CoolapkHot> {
 6.出炉倒扣到架子上放凉，放凉了再切割即可
 
 制作没有难度，吃起来也不错的一款小糕点。
-#小米10Pro# #手机摄影# #美食家#
   ''';
-  int _int = 100;
-  List<TextSpan> _list = List<TextSpan>();
+  TabController _tabController;
 
   @override
   void initState() {
     super.initState();
-    if (this._str.length > this._int) {
-      this._list.addAll([
-        TextSpan(text: this._str.substring(0, this._int) + '...'),
-        TextSpan(
-          text: '查看更多',
-          style: TextStyle(
-            color: Color(0xff129d59),
-          ),
-        )
-      ]);
-    } else {
-      this._list.add(TextSpan(text: this._str));
-    }
+    this._tabController = TabController(length: 2, vsync: this);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(6),
-        child: Container(
-          color: Colors.white,
-          child: Column(
-            children: [
-              Container(
-                padding: EdgeInsets.fromLTRB(12, 10, 12, 0),
+    return Scaffold(
+      backgroundColor: Color(0xfff5f5f5),
+      appBar: AppBar(
+        elevation: 0,
+        titleSpacing: 0,
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(color: Color(0xff757575)),
+        title: Text('动态', style: TextStyle(color: Color(0xff757575))),
+      ),
+      body: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return [
+            SliverToBoxAdapter(
+              child: Container(
+                color: Colors.white,
+                padding: EdgeInsets.fromLTRB(12, 0, 12, 12),
+                margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                 child: Column(
                   children: [
                     Row(
@@ -113,8 +85,7 @@ class _CoolapkHotState extends State<CoolapkHot> {
                           height: 40,
                           margin: EdgeInsets.fromLTRB(0, 0, 14, 0),
                           child: CircleAvatar(
-                            backgroundImage:
-                            AssetImage('assets/images/1.jpg'),
+                            backgroundImage: AssetImage('assets/images/1.jpg'),
                             child: Stack(
                               overflow: Overflow.visible,
                               children: [
@@ -172,13 +143,21 @@ class _CoolapkHotState extends State<CoolapkHot> {
                         Material(
                           color: Colors.transparent,
                           child: Ink(
-                            width: 40,
-                            height: 40,
+                            width: 60,
+                            height: 30,
+                            decoration: BoxDecoration(
+                              color: Color(0xff109d58),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
                             child: InkWell(
                               borderRadius: BorderRadius.circular(20),
-                              child: Icon(
-                                Icons.keyboard_arrow_down,
-                                color: Color(0xffbebebe),
+                              child: Center(
+                                child: Text(
+                                  '关注',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
                               ),
                               onTap: () {},
                             ),
@@ -186,17 +165,14 @@ class _CoolapkHotState extends State<CoolapkHot> {
                         ),
                       ],
                     ),
+                    SizedBox(height: 10),
                     Container(
-                      width: double.infinity,
-                      padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                      child: RichText(
-                        text: TextSpan(
-                          children: this._list.map((e) => e).toList(),
-                          style: TextStyle(color: Color(0xff202020)),
-                        ),
+                      child: Text(
+                        this._str,
+                        style: TextStyle(color: Color(0xff202020)),
                       ),
                     ),
-                    SizedBox(height: 15),
+                    // SizedBox(height: 15),
                     AspectRatio(
                       aspectRatio: 1 / 1,
                       child: ClipRRect(
@@ -220,86 +196,71 @@ class _CoolapkHotState extends State<CoolapkHot> {
                   ],
                 ),
               ),
-              SizedBox(height: 10,),
-              Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      height: 50,
-                      color: Colors.white,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.ac_unit_outlined,
-                            color: Color(0xffa4a2a5),
-                            size: 20,
-                          ),
-                          SizedBox(width: 5),
-                          Text(
-                            '277',
-                            style: TextStyle(
-                              color: Color(0xffa4a2a5),
-                              fontSize: 14,
-                            ),
-                          )
-                        ],
-                      ),
+            ),
+            SliverPersistentHeader(
+              pinned: true,
+              delegate: StickyTabBarDelegate(
+                height: 56,
+                child: Container(
+                  color: Colors.white,
+                  child: TabBar(
+                    isScrollable: true,
+                    controller: this._tabController,
+                    labelColor: Color(0xff109d58),
+                    unselectedLabelColor: Color(0xff757575),
+                    indicatorPadding: EdgeInsets.all(100),
+                    labelStyle: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
                     ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      height: 50,
-                      color: Colors.white,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.wb_cloudy_outlined,
-                            color: Color(0xffa4a2a5),
-                            size: 20,
-                          ),
-                          SizedBox(width: 4),
-                          Text(
-                            '99',
-                            style: TextStyle(
-                              color: Color(0xffa4a2a5),
-                              fontSize: 14,
-                            ),
-                          )
-                        ],
-                      ),
+                    unselectedLabelStyle: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.normal,
                     ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      height: 50,
-                      color: Colors.white,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.wb_sunny_outlined,
-                            color: Color(0xffa4a2a5),
-                            size: 20,
-                          ),
-                          SizedBox(width: 4),
-                          Text(
-                            '10',
-                            style: TextStyle(
-                              color: Color(0xffa4a2a5),
-                              fontSize: 14,
-                            ),
-                          )
-                        ],
-                      ),
+                    indicator: UnderlineCoolapkTabIndicator(
+                      borderSide:
+                          BorderSide(color: Color(0xff109d58), width: 2.6),
+                      insets: EdgeInsets.fromLTRB(26, 0, 26, 5),
                     ),
+                    tabs: [
+                      Tab(
+                        text: '赞 99',
+                      ),
+                      Tab(text: '回复 12'),
+                    ],
                   ),
-                ],
-              )
+                ),
+              ),
+            ),
+          ];
+        },
+        body: Container(
+          margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+          child: TabBarView(
+            controller: this._tabController,
+            children: [
+              Container(
+                color: Colors.white,
+                child: ListView.builder(
+                  itemBuilder: (BuildContext context, int index) {
+                    return ListTile(
+                      title: Text('标题$index'),
+                    );
+                  },
+                  itemCount: 100,
+                ),
+              ),
+              Container(
+                color: Colors.white,
+                child: ListView.builder(
+                  itemBuilder: (BuildContext context, int index) {
+                    return ListTile(
+                      title: Text('标题$index'),
+                    );
+                  },
+                  itemCount: 100,
+                ),
+              ),
             ],
           ),
         ),

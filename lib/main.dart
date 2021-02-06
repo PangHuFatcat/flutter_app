@@ -13,17 +13,13 @@ import './pages/login/index.dart';
 import './pages/demo/custom-scroll-view-dmo.dart';
 import './pages/demo/coolapk-index-demo.dart';
 import './pages/demo/coolapk-hot-demo.dart';
+import './pages/demo/coolapk-hot-details-demo.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    if (Platform.isAndroid) {
-      SystemUiOverlayStyle systemUiOverlayStyle =
-          SystemUiOverlayStyle(statusBarColor: Colors.transparent);
-      SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
-    }
     return MaterialApp(
       title: 'Welcome to Flutter',
       initialRoute: '/',
@@ -37,6 +33,7 @@ class MyApp extends StatelessWidget {
         Register.routeName: (context) => Register(),
         CustomScrollViewDemo.routeName: (context) => CustomScrollViewDemo(),
         CoolapkIndexDemo.routeName: (context) => CoolapkIndexDemo(),
+        CoolapkHotDetailsDemo.routeName: (context) => CoolapkHotDetailsDemo(),
         CoolapkHotDemo.routeName: (context) => CoolapkHotDemo(),
       },
     );
