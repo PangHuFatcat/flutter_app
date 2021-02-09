@@ -14,10 +14,11 @@ class CustomScrollViewDemo extends StatelessWidget {
         physics: BouncingScrollPhysics(),
         slivers: [
           SliverAppBar(
-            title: Text('AppBar'),
+            title: Text('AppBar', style: TextStyle(color: Colors.white)),
             expandedHeight: 300,
             stretch: true,
             pinned: true,
+            iconTheme: IconThemeData(color: Colors.white),
             backgroundColor: Colors.green[500],
             flexibleSpace: FlexibleSpaceBar(
               stretchModes: [

@@ -1,5 +1,3 @@
-import 'dart:io';
-import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -14,6 +12,7 @@ import './pages/demo/custom-scroll-view-dmo.dart';
 import './pages/demo/coolapk-index-demo.dart';
 import './pages/demo/coolapk-hot-demo.dart';
 import './pages/demo/coolapk-hot-details-demo.dart';
+import './pages/demo/douban-slide-view-demo.dart';
 
 void main() => runApp(MyApp());
 
@@ -25,6 +24,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        primaryColor: Colors.white,
+        accentColor: Colors.grey,
         splashFactory: InkRipple.splashFactory,
       ),
       routes: {
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
         CoolapkIndexDemo.routeName: (context) => CoolapkIndexDemo(),
         CoolapkHotDetailsDemo.routeName: (context) => CoolapkHotDetailsDemo(),
         CoolapkHotDemo.routeName: (context) => CoolapkHotDemo(),
+        DoubanSlideViewDemo.routeName: (context) => DoubanSlideViewDemo(),
       },
     );
   }

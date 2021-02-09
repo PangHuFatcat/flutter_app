@@ -58,6 +58,12 @@ class Home extends StatelessWidget {
                     Navigator.pushNamed(context, '/coolapk-hot-details-demo');
                   },
                 ),
+                ListViewItem(
+                  name: '豆瓣滑动打开抽屉',
+                  onTap: () {
+                    Navigator.pushNamed(context, '/douban-slide-view-demo');
+                  },
+                ),
               ],
             ),
           )
