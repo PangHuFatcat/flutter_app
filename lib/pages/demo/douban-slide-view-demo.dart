@@ -34,7 +34,8 @@ class _DoubanSlideViewDemoState extends State<DoubanSlideViewDemo> {
             ),
           ),
           DraggableScrollableSheet(
-            minChildSize: 0.2,
+            initialChildSize: 1 / MediaQuery.of(context).size.height * 100,
+            minChildSize: 1 / MediaQuery.of(context).size.height * 100,
             maxChildSize: 0.8,
             builder: (
               BuildContext context,
