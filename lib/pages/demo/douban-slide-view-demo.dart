@@ -27,7 +27,7 @@ class _DoubanSlideViewDemoState extends State<DoubanSlideViewDemo> {
             child: ListView.builder(
               itemBuilder: (BuildContext context, int index) {
                 return ListTile(
-                  title: Text('内容$index'),
+                  title: Text('内容 $index'),
                 );
               },
               itemCount: 20,
@@ -66,12 +66,12 @@ class _DoubanSlideViewDemoState extends State<DoubanSlideViewDemo> {
                     children: [
                       Positioned.fill(
                         child: ListView.builder(
-                          controller: scrollController,
                           itemBuilder: (BuildContext context, int index) {
                             return ListTile(
-                              title: Text('抽屉$index'),
+                              title: Text('抽屉 $index'),
                             );
                           },
+                          controller: scrollController,
                           itemCount: 20,
                         ),
                       ),
