@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
+import './login/index.dart';
 
 class Home extends StatelessWidget {
   @override
@@ -62,6 +63,16 @@ class Home extends StatelessWidget {
                   name: '豆瓣滑动打开抽屉',
                   onTap: () {
                     Navigator.pushNamed(context, '/douban-slide-view-demo');
+                  },
+                ),
+                ListViewItem(
+                  name: '名命路由传参',
+                  onTap: () {
+                    Navigator.pushNamed(
+                        context,
+                        '/login',
+                        arguments: LoginArguments(id: 1)
+                    );
                   },
                 ),
               ],
