@@ -13,6 +13,7 @@ import './pages/demo/coolapk-index-demo.dart';
 import './pages/demo/coolapk-hot-demo.dart';
 import './pages/demo/coolapk-hot-details-demo.dart';
 import './pages/demo/douban-slide-view-demo.dart';
+import './pages/demo/provider-demo.dart';
 
 void main() => runApp(MyApp());
 
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
         CoolapkHotDetailsDemo.routeName: (context) => CoolapkHotDetailsDemo(),
         CoolapkHotDemo.routeName: (context) => CoolapkHotDemo(),
         DoubanSlideViewDemo.routeName: (context) => DoubanSlideViewDemo(),
+        ProviderDemo.routeName: (context) => ProviderDemo(),
       },
     );
   }

@@ -75,6 +75,12 @@ class Home extends StatelessWidget {
                     );
                   },
                 ),
+                ListViewItem(
+                  name: 'Provider状态管理',
+                  onTap: () {
+                    Navigator.pushNamed(context, '/provider-demo');
+                  },
+                ),
               ],
             ),
           )
