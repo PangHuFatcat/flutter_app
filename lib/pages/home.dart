@@ -82,7 +82,7 @@ class Home extends StatelessWidget {
                   },
                 ),
                 ListViewItem(
-                  name: 'Provider 商品列表',
+                  name: 'Provider 购物车',
                   onTap: () {
                     Navigator.pushNamed(context, '/products-list-demo');
                   },
