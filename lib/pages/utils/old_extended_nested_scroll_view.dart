@@ -1540,6 +1540,11 @@ class _NestedScrollPosition extends ScrollPosition
     _parent?.detach(this);
     super.dispose();
   }
+
+  @override
+  void pointerScroll(double delta) {
+    // TODO: implement pointerScroll
+  }
 }
 
 enum _NestedBallisticScrollActivityMode { outer, inner, independent }
