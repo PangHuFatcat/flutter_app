@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_app/pages/demo/nested-navigator-demo.dart';
 import 'package:flutter_app/pages/model/carts.dart';
 import 'package:provider/provider.dart';
 
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
           ProviderDemo.routeName: (context) => ProviderDemo(),
           ProductsListDemo.routeName: (context) => ProductsListDemo(),
           CartsListDemo.routeName: (context) => CartsListDemo(),
+          NestedNavigatorDemo.routeName: (context) => NestedNavigatorDemo(),
         },
       ),
     );

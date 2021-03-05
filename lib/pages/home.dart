@@ -90,7 +90,7 @@ class Home extends StatelessWidget {
                 ListViewItem(
                   name: '嵌套 Navigator',
                   onTap: () {
-                    Navigator.pushNamed(context, '/products-list-demo');
+                    Navigator.pushNamed(context, '/nested-navigator-demo');
                   },
                 ),
               ],
