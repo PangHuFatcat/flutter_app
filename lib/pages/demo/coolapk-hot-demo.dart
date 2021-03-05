@@ -70,7 +70,7 @@ class _CoolapkHotState extends State<CoolapkHot> {
 #小米10Pro# #手机摄影# #美食家#
   ''';
   int _int = 100;
-  List<TextSpan> _list = List<TextSpan>();
+  List<TextSpan> _list = [];
 
   @override
   void initState() {

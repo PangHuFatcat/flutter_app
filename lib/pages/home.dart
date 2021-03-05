@@ -87,6 +87,12 @@ class Home extends StatelessWidget {
                     Navigator.pushNamed(context, '/products-list-demo');
                   },
                 ),
+                ListViewItem(
+                  name: '嵌套 Navigator',
+                  onTap: () {
+                    Navigator.pushNamed(context, '/products-list-demo');
+                  },
+                ),
               ],
             ),
           )

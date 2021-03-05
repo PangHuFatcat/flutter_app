@@ -22,7 +22,7 @@ class ProductsListDemo extends StatelessWidget {
       body: ListView.builder(
         itemBuilder: (BuildContext context, int index) {
           return Container(
-            padding: EdgeInsets.all(8),
+            padding: EdgeInsets.all(4),
             child: ListTile(
               title: Text('商品$index'),
               trailing: IconButton(

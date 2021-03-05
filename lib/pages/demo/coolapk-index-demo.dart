@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart' hide NestedScrollView;
+import 'package:flutter/material.dart';
 import 'coolapk-hot-demo.dart';
-import '../utils/old_extended_nested_scroll_view.dart';
-import '../utils/nested_scroll_view_inner_scroll_position_key_widget.dart';
 
 /*
 * 酷安首页
@@ -59,15 +57,6 @@ class _CoolapkIndexDemoState extends State<CoolapkIndexDemo>
                     ),
                   ),
                 ];
-              },
-              pinnedHeaderSliverHeightBuilder: () {
-                return 40;
-              },
-              innerScrollPositionKeyBuilder: () {
-                String index = 'Tab';
-                index += this._tabController.index.toString();
-                print(index);
-                return Key(index);
               },
               body: TabBarView(
                 controller: this._tabController,
@@ -214,14 +203,13 @@ class IndexTabBar extends StatelessWidget {
         splashColor: Colors.transparent,
       ),
       child: Container(
-        height: 46,
+        height: 50,
         color: Colors.white,
         child: TabBar(
           isScrollable: true,
           controller: this._tabController,
           labelColor: Color(0xff109d58),
           unselectedLabelColor: Color(0xff757575),
-          indicatorPadding: EdgeInsets.all(100),
           labelStyle: TextStyle(
             fontSize: 15,
             fontWeight: FontWeight.bold,
@@ -337,18 +325,15 @@ class _CoolapkHotViewState extends State<CoolapkHotView>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return NestedScrollViewInnerScrollPositionKeyWidget(
-      const Key('Tab0'),
-      RefreshIndicator(
-        onRefresh: () async {
-          await Future.delayed(Duration(seconds: 2), () {
-            print('下拉刷新');
-          });
-        },
-        child: ListView.builder(
-          itemCount: 3,
-          itemBuilder: (BuildContext context, int index) => CoolapkHot(),
-        ),
+    return RefreshIndicator(
+      onRefresh: () async {
+        await Future.delayed(Duration(seconds: 2), () {
+          print('下拉刷新');
+        });
+      },
+      child: ListView.builder(
+        itemCount: 3,
+        itemBuilder: (BuildContext context, int index) => CoolapkHot(),
       ),
     );
   }

@@ -21,7 +21,7 @@ class CartsListDemo extends StatelessWidget {
                   itemCount: carts.items.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
-                      padding: EdgeInsets.all(8),
+                      padding: EdgeInsets.all(4),
                       child: ListTile(
                         title: Text(carts.items[index].name),
                         subtitle: Text('价格: ${carts.items[index].price}'),
